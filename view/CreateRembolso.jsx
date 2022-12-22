@@ -24,6 +24,7 @@ const CreateRembolso = () => {
       comprobante: restOfParams
     }
     setComprobantes((prev) => [...prev, rembolso])
+    formRef.current.reset()
   }
 
   const [openComprobante, setOpenComprobante] = useState({ open: false, comprobante: {} })
