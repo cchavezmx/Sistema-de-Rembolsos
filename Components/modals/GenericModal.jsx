@@ -19,14 +19,18 @@ export default function GenericModal ({ open, handleClose, children, title }) {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
-        sx={{ '& .MuiDialog-paper': { width: '100%', maxWidth: 500 } }}
+        sx={{ '& .MuiDialog-paper': { width: '100vw', height: '500px', overflow: 'hidden' } }}
       >
         <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap'
+        }}>
           { children }
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cerrar</Button>
+        <DialogActions sx={{ backgroundColor: '#f8f8f8' }}>
+          <Button variant='contained' onClick={handleClose}>Cerrar</Button>
         </DialogActions>
       </Dialog>
     </div>
