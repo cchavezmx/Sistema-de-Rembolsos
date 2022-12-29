@@ -5,9 +5,13 @@ import { getStorage, ref, listAll, getDownloadURL, uploadBytes } from 'firebase/
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const config = process.env.NEXT_PUBLIC_FIREBASE_CONFIG || '{}'
 const firebaseConfig = {
-  ...JSON.parse(config)
+  apiKey: 'AIzaSyDQlTL8zvk6DcHpQFqVSypYmj7hZUkBx7I',
+  authDomain: 'itacatalgo.firebaseapp.com',
+  projectId: 'itacatalgo',
+  storageBucket: 'itacatalgo.appspot.com',
+  messagingSenderId: '543664139030',
+  appId: '1:543664139030:web:86a26fa7848090bc69fe37'
 }
 
 // Initialize Firebase
