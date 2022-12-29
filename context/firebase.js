@@ -5,8 +5,9 @@ import { getStorage, ref, listAll, getDownloadURL, uploadBytes } from 'firebase/
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+const config = process.env.NEXT_PUBLIC_FIREBASE_CONFIG || '{}'
 const firebaseConfig = {
-  ...JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_CONFIG)
+  ...JSON.parse(config)
 }
 
 // Initialize Firebase
