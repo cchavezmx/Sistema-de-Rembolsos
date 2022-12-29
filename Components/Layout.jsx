@@ -64,7 +64,7 @@ export default function Layout ({ children }) {
           </List> */}
         </Box>
       </Drawer>
-      <Box>
+      <Box sx={{ display: 'grid', placeContent: 'center', width: '100vw' }}>
        { children }
       </Box>
     </Box>

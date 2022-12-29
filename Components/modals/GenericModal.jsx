@@ -10,7 +10,7 @@ const Transition = forwardRef(function Transition (props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-export default function GenericModal ({ open, handleClose, children, title }) {
+export default function GenericModal ({ open, handleClose, children, title, confirmAction }) {
   return (
     <div>
       <Dialog
@@ -31,6 +31,7 @@ export default function GenericModal ({ open, handleClose, children, title }) {
         </DialogContent>
         <DialogActions sx={{ backgroundColor: '#f8f8f8' }}>
           <Button variant='contained' onClick={handleClose}>Cerrar</Button>
+          { confirmAction && confirmAction }
         </DialogActions>
       </Dialog>
     </div>
