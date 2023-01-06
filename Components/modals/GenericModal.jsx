@@ -10,7 +10,7 @@ const Transition = forwardRef(function Transition (props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-export default function GenericModal ({ open, handleClose, children, title, confirmAction }) {
+export default function GenericModal ({ open, handleClose, children, title, confirmAction, sx }) {
   return (
     <div>
       <Dialog
@@ -19,7 +19,7 @@ export default function GenericModal ({ open, handleClose, children, title, conf
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
-        sx={{ '& .MuiDialog-paper': { width: '100vw', height: '500px', overflow: 'hidden' } }}
+        sx={{ '& .MuiDialog-paper': { width: '100vw', height: '500px', overflow: 'hidden', ...sx } }}
       >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent sx={{

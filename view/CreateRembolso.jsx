@@ -11,7 +11,6 @@ import fetcher from '../context/fetcher'
 import { addFile } from '../context/firebase'
 import ModalConfirm from '../Components/Rembolsos/ModalConfirm'
 import DatosComprobante from '../Components/Rembolsos/DatosComprobante'
-
 const stack = { border: '1px solid #1e70ff', padding: '10px', borderRadius: '4px' }
 const obras = ['BERSHKA PLAYA DE CARMEN']
 
@@ -175,7 +174,7 @@ const CreateRembolso = () => {
             title='Datos del comprobante'
             open={openComprobante.open}
             handleClose={onCloseComprobante}>
-          <DatosComprobante comprobante={openComprobante} />
+          <DatosComprobante openComprobante={openComprobante} />
         </GenericModal>
     )
   }, [openComprobante])
@@ -213,7 +212,7 @@ const CreateRembolso = () => {
         <div>
             { onClickComprobante }
             <ModalConfirmComponent />
-            <Box sx={{ ...flexColumn }}>
+            <Box sx={{ ...flexColumn, minWidth: '50vw' }}>
                 <h1>Crear Reembolso</h1>
                 <form className='formStyles' onSubmit={onSubmitHandler} ref={formRef}>
                     <Stack direction="column" justifyContent='center' sx={{ ...stack, alignItems: 'center', gap: '20px' }}>
@@ -277,99 +276,98 @@ const CreateRembolso = () => {
                 <Typography variant="h5" component="div" sx={{ ...title }}>
                     Agregar comprobantes
                 </Typography>
-                <Box sx={{ border: '2px solid #0288d1', borderRadius: '4px', padding: '0 10px' }}>
-                    <Stack justifyContent="center" direction="row"
-                      sx={{ margin: '20px', display: 'flex', gap: '12px', backgroundColor: '#f2f2f2', padding: '1rem' }}>
-                        <FormControlLabel
-                          control={<Checkbox checked={deducibleState}
-                          onChange={() => setDeducibleState(!deducibleState)} />}
-                          label="Deducible"
-                        />
-                    </Stack>
-                    <Stack sx={{ margin: '20px', display: 'flex', gap: '12px' }}>
-                      { !deducibleState && (
-                      <TextField
-                        error={errors.proveedor}
-                        type="text"
-                        name="proveedor"
-                        fullWidth
-                        label="Nombre del Proveedor"
-                      />
-                      ) }
-                      <TextField
-                        type="text"
-                        name="concepto"
-                        fullWidth
-                        label="Concepto"
-                        error={errors.concepto}
-                      />
-                      <Selector
-                        data={obras}
-                        label="obra"
-                        name="obra"
-                        fullWidth
-                        error={errors.concepto}
-                      />
-                    </Stack>
-                    <Stack direction="row" sx={{ margin: '20px', display: 'flex', gap: '12px', justifyContent: 'space-between' }}>
-                        {
-                          !deducibleState && (
-                        <>
-                          <TextField type="text" name="facturaFolio" label="Número de nota" error={errors.facturaFolio}/>
+                  <Box sx={{ border: '2px solid #0288d1', borderRadius: '4px', padding: '0 10px', width: '100%' }}>
+                      <Stack justifyContent="center" direction="row"
+                        sx={{ margin: '20px', display: 'flex', gap: '12px', backgroundColor: '#f2f2f2', padding: '1rem' }}>
                           <FormControlLabel
-                            labelPlacement='bottom'
-                            control={<TextField type="date" name="facturaDate" error={errors.facturaDate} />}
-                            label="Fecha de la nota"
+                            control={<Checkbox checked={deducibleState}
+                            onChange={() => setDeducibleState(!deducibleState)} />}
+                            label="Deducible"
                           />
-                          <Selector
-                            data={metodoPago} l
-                            abel="Metódo pago"
-                            name="metodoPago"
-                            fullWidth
-                            error={errors.metodoPago}
-                            sx={{ width: '200px' }}
-                          />
-                        </>
-                          )
-                        }
-                    </Stack>
-                     {
-                        !deducibleState
-                          ? (
-                          <Stack direction="row" sx={{ margin: '20px', display: 'flex', gap: '12px' }}>
-                            <TextField type="text" name="subtotal" fullWidth label="Subtotal" error={errors.subtotal}/>
-                            <TextField type="text" name="impuestos" fullWidth label="Impuestos" error={errors.impuestos}/>
-                            <TextField type="text" name="otroimpuesto" value="0" fullWidth label="Otro" error={errors.otroimpuesto}/>
-                            <TextField type="text" name="total" fullWidth label="Total" error={errors.total}/>
-                          </Stack>
+                      </Stack>
+                      <Stack sx={{ margin: '20px', display: 'flex', gap: '12px' }}>
+                        { !deducibleState && (
+                        <TextField
+                          error={errors.proveedor}
+                          type="text"
+                          name="proveedor"
+                          fullWidth
+                          label="Nombre del Proveedor"
+                        />
+                        ) }
+                        <TextField
+                          type="text"
+                          name="concepto"
+                          fullWidth
+                          label="Agrega el concepto del gasto"
+                          error={errors.concepto}
+                        />
+                        <Selector
+                          data={obras}
+                          label="obra"
+                          name="obra"
+                          fullWidth
+                          error={errors.concepto}
+                        />
+                      </Stack>
+                      <Stack direction="row" sx={{ margin: '20px', display: 'flex', gap: '12px', justifyContent: 'space-between' }}>
+                          {
+                            !deducibleState && (
+                          <>
+                            <TextField type="text" name="facturaFolio" label="Número de nota" error={errors.facturaFolio}/>
+                            <FormControlLabel
+                              labelPlacement='bottom'
+                              control={<TextField type="date" name="facturaDate" error={errors.facturaDate} />}
+                              label="Fecha de la nota"
+                            />
+                            <Selector
+                              data={metodoPago} l
+                              abel="Metódo pago"
+                              name="metodoPago"
+                              fullWidth
+                              error={errors.metodoPago}
+                              sx={{ width: '200px' }}
+                            />
+                          </>
                             )
-                          : (
-                            <Stack direction="column" sx={{ margin: '20px', display: 'flex', gap: '12px' }}>
-                              <label>XML</label>
-                              <TextField variant='standard' type="file" name="xml" fullWidth label="XML" onChange={(e) => {
-                                if (e.target.files[0].type !== 'text/xml') {
-                                  toast.error('El archivo no es un XML')
-                                  e.target.value = ''
-                                }
-                              }}/>
-                              <label>PDF</label>
-                              <TextField variant='standard' type="file" name="pdf" fullWidth label="PDF" onChange={(e) => {
-                                if (e.target.files[0].type !== 'application/pdf') {
-                                  toast.error('El archivo no es un PDF')
-                                  e.target.value = ''
-                                }
-                              }}/>
-                          </Stack>
-                            )
-                     }
-                    <Stack direction="row" sx={{ margin: '20px', gap: '12px', justifyContent: 'center' }}>
-                    <IconButton type="submit" sx={{ backgroundColor: '#0288d1', width: '60px', color: '#ffff', height: '60px' }}>
-                        <AddIcon />
-                    </IconButton>
-                    </Stack>
-                </Box>
+                          }
+                      </Stack>
+                      {
+                          !deducibleState
+                            ? (
+                            <Stack direction="row" sx={{ margin: '20px', display: 'flex', gap: '12px' }}>
+                              <TextField type="text" name="subtotal" fullWidth label="Subtotal" error={errors.subtotal}/>
+                              <TextField type="text" name="impuestos" fullWidth label="Impuestos" error={errors.impuestos}/>
+                              <TextField type="text" name="otroimpuesto" value="0" fullWidth label="Otro" error={errors.otroimpuesto}/>
+                              <TextField type="text" name="total" fullWidth label="Total" error={errors.total}/>
+                            </Stack>
+                              )
+                            : (
+                              <Stack direction="column" sx={{ margin: '20px', display: 'flex', gap: '12px' }}>
+                                <label>XML</label>
+                                <TextField variant='standard' type="file" name="xml" fullWidth label="XML" onChange={(e) => {
+                                  if (e.target.files[0].type !== 'text/xml') {
+                                    toast.error('El archivo no es un XML')
+                                    e.target.value = ''
+                                  }
+                                }}/>
+                                <label>PDF</label>
+                                <TextField variant='standard' type="file" name="pdf" fullWidth label="PDF" onChange={(e) => {
+                                  if (e.target.files[0].type !== 'application/pdf') {
+                                    toast.error('El archivo no es un PDF')
+                                    e.target.value = ''
+                                  }
+                                }}/>
+                            </Stack>
+                              )
+                      }
+                      <Stack direction="row" sx={{ margin: '20px', gap: '12px', justifyContent: 'center' }}>
+                      <IconButton type="submit" sx={{ backgroundColor: '#0288d1', width: '60px', color: '#ffff', height: '60px' }}>
+                          <AddIcon />
+                      </IconButton>
+                      </Stack>
+                  </Box>
                 </form>
-
             </Box>
         </div>
   )

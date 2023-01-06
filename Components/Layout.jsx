@@ -11,10 +11,21 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
+// import MailIcon from '@mui/icons-material/Mail'
+import TableRowsIcon from '@mui/icons-material/TableRows'
+import SettingsIcon from '@mui/icons-material/Settings'
+import HomeIcon from '@mui/icons-material/Home'
+import Link from 'next/link'
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 const drawerWidth = 200
+
+const menu = [
+  { name: 'Inicio', icon: <HomeIcon />, link: '/' },
+  { name: 'Reembolso', icon: <AddCircleIcon />, link: '/reembolsos' },
+  { name: 'Mis Reembolsos', icon: <TableRowsIcon />, link: '/mis-reembolsos' },
+  { name: 'Configuración', icon: <SettingsIcon />, link: '/config' }
+]
 
 export default function Layout ({ children }) {
   return (
@@ -38,15 +49,17 @@ export default function Layout ({ children }) {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            {['Home', 'Comprobacion', 'Mensajes', 'Configuración'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
+            {menu.map((item, index) => (
+              <ListItem key={item.name + index} disablePadding>
+              <Link href={item.link} passHref>
+              <ListItemButton>
+                <ListItemIcon>
+                    {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+              </Link>
+            </ListItem>
             ))}
           </List>
           <Divider />

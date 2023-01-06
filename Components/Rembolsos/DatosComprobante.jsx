@@ -2,6 +2,7 @@ import { TextField, Stack } from '@mui/material'
 import { MONY_BEUTY } from '../../utils/CONST'
 
 const DatosComprobante = ({ openComprobante = {} }) => {
+  console.log('🚀 ~ file: DatosComprobante.jsx:5 ~ DatosComprobante ~ openComprobante', openComprobante)
   return (
         <>
             {

@@ -1,5 +1,5 @@
 export const flexColumn = {
-  minWidth: '700px', height: '100%', padding: '0 2rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'
+  width: '100%', height: '100%', padding: '0 2rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'
 }
 export const title = { textAlign: 'center', fontWeight: '800', padding: '10px 0' }
 
@@ -37,3 +37,5 @@ export const DATE_BEUTY = (date) => {
 export const MONY_BEUTY = (mony) => {
   return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(mony)
 }
+
+export const STATUS_REEMBOLSO = ['Pendiente', 'Aprobado', 'Rechazado', 'Cancelado', 'Atencion']

@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import CreateRembolso from '../view/CreateRembolso'
+import HomeDashboard from '../view/HomeDashboard'
 
 export default function Home () {
   return (
@@ -11,8 +10,13 @@ export default function Home () {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <CreateRembolso />
+      <main style={{ width: '70vw' }}>
+        <h1>
+          Tesoreria Grupo Intecsa
+        </h1>
+        <section>
+          <HomeDashboard />
+        </section>
       </main>
     </>
   )
