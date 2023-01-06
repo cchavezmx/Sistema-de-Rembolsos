@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
 import { TextField, Box, Button } from '@mui/material'
 
 const TableComprobanteReview = ({ data }) => {
   console.log('🚀 ~ file: TableComprobanteReview.jsx:4 ~ TableComprobanteReview ~ data', data)
   const { comprobantes } = data || {}
-  const [showPDF, setShowPDF] = useState(false)
   return (
     <>
         {
