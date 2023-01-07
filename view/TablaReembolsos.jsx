@@ -4,6 +4,7 @@ import { Chip, Box, Typography } from '@mui/material'
 import { DATE_BEUTY } from '../utils/CONST'
 import GenericModal from '../Components/modals/GenericModal'
 import TableComprobanteReview from '../Components/Rembolsos/TableComprobanteReview'
+import NotifyReembolso from '../Components/NotifyReembolso'
 
 const TablaReembolsos = ({ DATA }) => {
   const [openViewComprobantes, setOpenViewComprobantes] = useState({
@@ -50,7 +51,7 @@ const TablaReembolsos = ({ DATA }) => {
     { field: 'obra', headerName: 'Obra', width: 220, flex: 2 },
     { field: 'comprobantes', headerName: 'Comprobantes', width: 130, renderCell: (params) => ComprobantesButton(params) },
     { field: 'status', headerName: 'Estatus', width: 130, renderCell: (params) => StatusColors(params.value) },
-    { field: 'comentarios', headerName: 'Comentarios', width: 100 }
+    { field: 'comentarios', headerName: 'Comentarios', width: 100, height: '80px', renderCell: (params) => NotifyReembolso({ id: params.id }) }
   ]
 
   const formatRowns = (rows) => {
@@ -62,7 +63,7 @@ const TablaReembolsos = ({ DATA }) => {
         finalDate: DATE_BEUTY(item.finalDate),
         comprobantes: item.comprobantes,
         obra: item.comprobantes[0].obra || 'N/A',
-        comentarios: item.comentarios || 'N/A'
+        comentarios: item._id
       }
     })
   }

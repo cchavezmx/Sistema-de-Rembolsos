@@ -107,3 +107,38 @@ main {
   width: 100%;
   margin-bottom: 4rem;
 }
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.chat-incomming {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.chat-incomming p {
+  display: inline;
+  margin-bottom: 1rem;
+  background-color: #1565c0;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+.chat-outgoing {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.chat-outgoing p {
+  margin-bottom: 1rem;
+  background-color: #d7fad1;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: black;
+}
