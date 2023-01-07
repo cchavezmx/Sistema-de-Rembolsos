@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { DataGrid, esES, GridToolbar } from '@mui/x-data-grid'
 import { Chip, Box, Typography } from '@mui/material'
-import { DATE_BEUTY } from '../utils/CONST'
+import { DATE_BEUTY, MONY_BEUTY } from '../utils/CONST'
 import GenericModal from '../Components/modals/GenericModal'
 import TableComprobanteReview from '../Components/Rembolsos/TableComprobanteReview'
 import NotifyReembolso from '../Components/NotifyReembolso'
@@ -50,6 +50,7 @@ const TablaReembolsos = ({ DATA }) => {
     { field: 'finalDate', headerName: 'Fecha final', width: 100 },
     { field: 'obra', headerName: 'Obra', width: 220, flex: 2 },
     { field: 'comprobantes', headerName: 'Comprobantes', width: 130, renderCell: (params) => ComprobantesButton(params) },
+    { field: 'total', headerName: 'Total', width: 130 },
     { field: 'status', headerName: 'Estatus', width: 130, renderCell: (params) => StatusColors(params.value) },
     { field: 'comentarios', headerName: 'Comentarios', width: 100, height: '80px', renderCell: (params) => NotifyReembolso({ id: params.id }) }
   ]
@@ -63,7 +64,8 @@ const TablaReembolsos = ({ DATA }) => {
         finalDate: DATE_BEUTY(item.finalDate),
         comprobantes: item.comprobantes,
         obra: item.comprobantes[0].obra || 'N/A',
-        comentarios: item._id
+        comentarios: item._id,
+        total: MONY_BEUTY(item.comprobantes.reduce((acc, curr) => acc + Number(curr.total), 0))
       }
     })
   }
